@@ -36,7 +36,7 @@ public class Main {
                 for (int j = 0; j < w; j++) {
                     if (arr[i][j] == 1 && !visited[i][j]) {
                         cnt++;
-                        bfs(i,j);
+                        dfs(i,j);
                     }
                 }
             }
@@ -46,20 +46,14 @@ public class Main {
         }
     }
 
-    static void bfs(int si, int sj) {
-        Queue<int[]> q = new ArrayDeque<>();
-        q.add(new int[]{si, sj});
+    static void dfs(int si, int sj) {
+
         visited[si][sj] = true;
 
-        while (!q.isEmpty()) {
-            int[] cur = q.remove();
-            int i = cur[0], j = cur[1];
-            for (int k = 0; k < 8; k++) {
-                int ni = i + di[k], nj = j + dj[k];
-                if (0 <= ni && ni < h && 0 <= nj && nj < w && arr[ni][nj] == 1 && !visited[ni][nj]) {
-                    visited[ni][nj] = true;
-                    q.add(new int[]{ni, nj});
-                }
+        for (int k = 0; k < 8; k++) {
+            int ni = si + di[k], nj = sj + dj[k];
+            if (0 <= ni && ni < h && 0 <= nj && nj < w && arr[ni][nj] == 1 && !visited[ni][nj]) {
+                dfs(ni, nj);
             }
         }
     }
